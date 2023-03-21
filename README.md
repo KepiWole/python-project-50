@@ -4,4 +4,4 @@
 
 
 ### Gendiff
-[!asicast(https://asciinema.org/a/usGll7FLEdymjhf9SRh7Drwgh.png)](https://asciinema.org/a/usGll7FLEdymjhf9SRh7Drwgh)
+[![asiicast](https://asciinema.org/a/usGll7FLEdymjhf9SRh7Drwgh.png)](https://asciinema.org/a/usGll7FLEdymjhf9SRh7Drwgh)
