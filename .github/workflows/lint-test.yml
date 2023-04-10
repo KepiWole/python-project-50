@@ -1,6 +1,6 @@
-name: 'lint&test'
+name: Python package
 
-on:  push
+on: [push]
 
 jobs:
   build:
@@ -8,22 +8,28 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
-    - name: Pulls the repo
-      uses: actions/checkout@v2
-    
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-      
-    - name: Set up Poetry for Python
-      uses: Gr1N/setup-poetry@v7
-    - name: Install project dependencies with poetry
-      run: make install
-
+      - uses: actions/checkout@v3
+      - name: Setup Python # Set Python version
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      # Install pip and pytest
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name: Test with pytest
+        run: pytest tests.py --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
+      - name: Upload pytest test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results-${{ matrix.python-version }}
+          path: junit/test-results-${{ matrix.python-version }}.xml
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
   lint:
     runs-on: ubuntu-latest
     strategy:
