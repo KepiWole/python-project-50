@@ -23,6 +23,6 @@ def generate_diff(file_name1, file_name2):
 	for key in result:
 		print(key,':', result[key])
 	print('}')
-
+	return result
 if __name__ == '__main__':
     generate_diff(filename1, filename2)
