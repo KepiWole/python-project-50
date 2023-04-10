@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse
+import argparse, sys
 from gendiff.generate import generate_diff
 
 def parse_args():
@@ -8,6 +8,7 @@ def parse_args():
     parser.add_argument('filename1', metavar='first_file')
     parser.add_argument('filename2', metavar='second_file')
     parser.add_argument('-f', '--format', help='set format of output')
+    args, unknown = parser.parse_known_args()
 
     return parser.parse_args()
 

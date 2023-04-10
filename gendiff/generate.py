@@ -1,10 +1,10 @@
 import json
+from gendiff.input_parser import parse_datafile
 
-def generate_diff(filename1, filename2):
-	with open('testFiles/file1.json') as json_file:
-		filename1 = json.load(json_file)
-	with open('testFiles/file2.json') as json_file:
-		filename2 = json.load(json_file)
+
+def generate_diff(file_name1, file_name2):
+	filename1 = parse_datafile(file_name1)
+	filename2 = parse_datafile(file_name2)
 	print('{')
 	result = {}
 	for key in filename1:
