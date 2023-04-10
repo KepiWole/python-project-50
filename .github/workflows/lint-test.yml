@@ -45,8 +45,23 @@ jobs:
       run: make install
 
   lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - name: Pulls the repo
+      uses: actions/checkout@v2
+
     - name: Lint with flake8
       run: make lint
+
   pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
     - name: Test with pytest
       run: make test
