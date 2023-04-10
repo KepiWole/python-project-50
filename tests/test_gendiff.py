@@ -1,4 +1,4 @@
-from gendiff.genarate import generate_diff
+from gendiff.generate import generate_diff
 
 RIGHT_RESULT = {
     "    host": "hexlet.io",
