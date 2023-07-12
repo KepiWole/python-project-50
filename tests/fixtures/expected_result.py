@@ -81,7 +81,7 @@ NESTED_STYLISH_DIFF_STR_12 = '''{
         }
         setting6: {
             doge: {
-              - wow: 
+              - wow:
               + wow: so much
             }
             key: value
