@@ -1,28 +1,26 @@
-import json
+from gendiff.ast_builder import build_ast
 from gendiff.input_parser import parse_datafile
+from gendiff.formatters import gen_plain_diff, gen_stylish_diff, gen_json_diff
 
 
-def generate_diff(file_name1, file_name2):
-	filename1 = parse_datafile(file_name1)
-	filename2 = parse_datafile(file_name2)
-	print('{')
-	result = {}
-	for key in filename1:
-		if (key in filename2) and filename2[key] == filename1[key]:
-			result['  ' + key] = filename1[key]
-			del filename2[key]
-		elif (key in filename2) and filename2[key] != filename1[key]:
-			result['- ' + key] = filename1[key]
-			result['+ ' + key] = filename2[key]
-			del filename2[key]
-		else:
-			result['- ' + key] = filename1[key]
-	filename2_reduction = {f'+ {key}': v for key, v in filename2.items()}
-	result.update(filename2_reduction)
-	result = dict(sorted(result.items(), key=lambda x: x[0][2]))
-	for key in result:
-		print(key,':', result[key])
-	print('}')
-	return result
-if __name__ == '__main__':
-    generate_diff(filename1, filename2)
+def generate_diff(
+        file_path1: str, file_path2: str, format_name='stylish') -> str:
+    """ Returns the given special formatted ('plain'/'stylish'/'json') text
+      representation of the difference between two JSONs or YAMLs.
+
+    Args:
+        file_path1: Path to the original JSON/YAML
+        file_path1: Path to the final JSON/YAML
+        format_name: text representation format name, defaults to 'stylish'
+
+    Returns:
+        The given special formatted text representation of the difference
+      between the given files
+    """
+    dict1 = parse_datafile(file_path1)
+    dict2 = parse_datafile(file_path2)
+
+    return {'plain': gen_plain_diff,
+            'stylish': gen_stylish_diff,
+            'json': gen_json_diff,
+            }[format_name](build_ast(dict1, dict2))
