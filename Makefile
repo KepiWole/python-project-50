@@ -2,9 +2,6 @@
 build:
 	poetry build
 
-publish:
-	poetry publish
-
 install:
 	poetry install
 
