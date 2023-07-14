@@ -19,6 +19,7 @@ def parser_function():
     args = parser.parse_args()
     return args
 
+
 def main():
     """A function that creates description in terminal. """
     args = parser_function()
