@@ -9,16 +9,17 @@ def set_dict_value(d: dict, path: tuple, value):
             current = current[key]
         current[path[-1]] = value
 
+diff_dict = {}
 
 def build_ast(dict_old: dict, dict_new: dict) -> dict:
     """ Build AST - special format diff dictionary that describes what happened
     to each key in the given compared dictionaries: whether it was added,
     changed, or removed, as well as the corresponding dictionary values.
     """
+    helper(dict_old, dict_new, tuple())
+    return diff_dict
 
-    diff_dict = {}
-
-    def helper(dict_old, dict_new, path):
+def helper(dict_old, dict_new, path):
 
         old_keys = dict_old.keys()
         new_keys = dict_new.keys()
@@ -47,6 +48,3 @@ def build_ast(dict_old: dict, dict_new: dict) -> dict:
             else:
                 set_dict_value(diff_dict, path + (key,),
                                ('unchanged', value_old))
-
-    helper(dict_old, dict_new, tuple())
-    return diff_dict

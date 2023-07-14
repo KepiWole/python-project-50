@@ -6,8 +6,7 @@ from gendiff.generate import generate_diff
 import argparse
 
 
-def main():
-    """A function that creates description in terminal. """
+def parser_function():
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.')
     parser.add_argument('first_file')
@@ -18,6 +17,11 @@ def main():
                         default='stylish',
                         help='set format of output')
     args = parser.parse_args()
+    return args
+
+def main():
+    """A function that creates description in terminal. """
+    args = parser_function()
     diff = generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
