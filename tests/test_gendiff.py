@@ -7,7 +7,7 @@ from tests.fixtures.expected_result import NESTED_PLAIN_DIFF_STR_12
 from tests.fixtures.expected_result import NESTED_STYLISH_DIFF_STR_12
 
 
-@pytest.mark.paramerize("test_generate_diff, expected", [
+@pytest.mark.parametrize("test_generate_diff, expected", [
     (('./tests/fixtures/plain1.json',
       './tests/fixtures/plain2.json'), PLAIN_DIFF_STR_12),
     (('./tests/fixtures/plain2.json',
