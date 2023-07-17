@@ -1,5 +1,6 @@
 import pytest
 import os
+import yaml
 from gendiff.generate import generate_diff
 from tests.fixtures.expected_result import PLAIN_DIFF_STR_12
 from tests.fixtures.expected_result import PLAIN_DIFF_STR_21
