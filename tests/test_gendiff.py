@@ -42,6 +42,5 @@ from tests.fixtures.expected_result import NESTED_STYLISH_DIFF_STR_12
       './tests/fixtures/nested2.json', 'plain'), NESTED_PLAIN_DIFF_STR_12)]
 )
 
-
 def test_gendiff(test_generate_diff, expected):
     assert generate_diff(test_generate_diff) == expected
